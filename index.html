@@ -159,7 +159,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/04/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">我的第一篇博客</a>
+      <a class="article-title" href="/2023/12/04/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">hexo博客载入图片时常见问题（the image could not be loaded）</a>
     </h1>
   
 
@@ -172,11 +172,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><p>内容</p>
+        <h2 id="hexo插入本地图片和网络图片的普遍有以下两种方法"><a href="#hexo插入本地图片和网络图片的普遍有以下两种方法" class="headerlink" title="hexo插入本地图片和网络图片的普遍有以下两种方法"></a>hexo插入本地图片和网络图片的普遍有以下两种方法</h2><h3 id="插入本地图片"><a href="#插入本地图片" class="headerlink" title="插入本地图片"></a>插入本地图片</h3><p>本地图片统一放在source&#x2F;images文件夹中<br>例如: source&#x2F;images&#x2F;test.jpg</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">![](images/text.jpg)</span><br><span class="line">&lt;img src=<span class="string">&quot;/images/text.jpg&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
 <hr>
-<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><p>内容</p>
+<h3 id="插入网络图片"><a href="#插入网络图片" class="headerlink" title="插入网络图片"></a>插入网络图片</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">![](网络图片地址)</span><br><span class="line">&lt;img src=<span class="string">&quot;网络图片地址&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="http://www.condesheep.cn/">www.condesheep.cn</a></p>
+<p>首先载入本地图片时发现自己格式正确却加载不出图片<br>首先可以尝试把图片jpg格式修改成png格式<br>直接鼠标右键文件重命名即可,然后把格式改成</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">![](images/text.png)</span><br><span class="line">&lt;img src=<span class="string">&quot;/images/text.png&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如何还是失败<br>可以在cmd中运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https://github.com/xcodebuild/hexo-asset-image</span><br></pre></td></tr></table></figure>
+
+<p>并在文件_config.yml的书写改成</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">![](./images/text.jpg)</span><br><span class="line">&lt;img src=<span class="string">&quot;./images/text.jpg&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>若果是网络图片出现问题可能是引用图片的网站存在加密，<br>可保存在本地在插入hexo</p>
 
       
 
