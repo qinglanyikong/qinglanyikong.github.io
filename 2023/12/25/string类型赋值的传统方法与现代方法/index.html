@@ -6,15 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>自定义类型赋值的传统方法与现代方法 | Hexo</title>
+  <title>string类型赋值的传统方法与现代方法 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="自定义类型赋值的传统方法与现代方法">
-<meta property="og:url" content="http://example.com/2023/12/25/%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B%E8%B5%8B%E5%80%BC%E7%9A%84%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95/index.html">
+  <meta name="description" content="使用string类型赋值时，由于c++关于string的赋值是浅拷贝，需要使用重载运算符书写深拷贝，而书写string类型赋值深拷贝有传统方法和现在方法两个写法 传统方法12345678910string&amp; operator&#x3D;(const String &amp; s)    &amp;#123;	 if (this!&#x3D;&amp;s) &amp;#123;		 char* tmp &#x3D; new char[s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="string类型赋值的传统方法与现代方法">
+<meta property="og:url" content="http://example.com/2023/12/25/string%E7%B1%BB%E5%9E%8B%E8%B5%8B%E5%80%BC%E7%9A%84%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="使用string类型赋值时，由于c++关于string的赋值是浅拷贝，需要使用重载运算符书写深拷贝，而书写string类型赋值深拷贝有传统方法和现在方法两个写法 传统方法12345678910string&amp; operator&#x3D;(const String &amp; s)    &amp;#123;	 if (this!&#x3D;&amp;s) &amp;#123;		 char* tmp &#x3D; new char[s">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-12-25T15:54:31.000Z">
-<meta property="article:modified_time" content="2023-12-25T15:54:31.580Z">
+<meta property="article:modified_time" content="2023-12-27T16:31:15.212Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -152,19 +154,19 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-自定义类型赋值的传统方法与现代方法" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-string类型赋值的传统方法与现代方法" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      自定义类型赋值的传统方法与现代方法
+      string类型赋值的传统方法与现代方法
     </h1>
   
 
         
-        <a href="/2023/12/25/%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B%E8%B5%8B%E5%80%BC%E7%9A%84%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95/" class="archive-article-date">
+        <a href="/2023/12/25/string%E7%B1%BB%E5%9E%8B%E8%B5%8B%E5%80%BC%E7%9A%84%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95/" class="archive-article-date">
   	<time datetime="2023-12-25T15:54:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-25</time>
 </a>
         
@@ -172,7 +174,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>使用string类型赋值时，由于c++关于string的赋值是浅拷贝，需要使用重载运算符书写深拷贝，而书写string类型赋值深拷贝<br>有传统方法和现在方法两个写法</p>
+<h2 id="传统方法"><a href="#传统方法" class="headerlink" title="传统方法"></a>传统方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">string&amp; operator=(const String &amp; s)</span><br><span class="line">    &#123;</span><br><span class="line">	 <span class="keyword">if</span> (this!=&amp;s) &#123;</span><br><span class="line">		 char* tmp = new char[strlen(s._str) + 1];</span><br><span class="line">		 strcpy(tmp, s._str);</span><br><span class="line">		 delete[]_str;</span><br><span class="line">		 _str=tmp;sting</span><br><span class="line">	 &#125;</span><br><span class="line">        <span class="built_in">return</span> *this;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>传统方法在形参和返回值反面全使用引用，并且在赋值前先检查是否是给自己赋值，避免性能的浪费，在赋值时，现创建一个大小空间与赋值数据相同的tmp,后再拷贝数据后在</p>
+
       
 
       
@@ -251,7 +256,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/12/25/%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B%E8%B5%8B%E5%80%BC%E7%9A%84%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/12/25/string%E7%B1%BB%E5%9E%8B%E8%B5%8B%E5%80%BC%E7%9A%84%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95/" alt="微信分享二维码">
     </div>
 </div>
 
