@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>string手动深拷贝的传统方法与现代写法 | Hexo</title>
+  <title>vector与list的优缺点 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="当我们自定义类型时，深拷贝通常需要手动实现拷贝构造函数和拷贝复制运算符，我将以String为例书写出手动实现深拷贝的几种方法 下面是定义的成员函数： 1char* _str; 传统方法12345string(const string&amp; s)    :_str(new char[strlen(s._str)+1])&amp;#123;strcpy(_str,s._str);&amp;#125; 这个写法可以">
+  <meta name="description" content="vector缺点：1、头部和中部的插入删除效率低。0(N),因为需要挪动数据2、插入数据空间不够需要增容。增容需要开新空间、拷贝数据、释放旧空间，会付出很大的代价优点：1、支持下标的随机访问。 间接的就很好的支持排序、二分查找、堆算法等等 list缺点：1、不支持随机访问。优点：1、list头部、中间插入不再需要挪动数据，效率高。0(1)2、list插入数据是新增节点，不需要增容 总结vector">
 <meta property="og:type" content="article">
-<meta property="og:title" content="string手动深拷贝的传统方法与现代写法">
-<meta property="og:url" content="http://example.com/2023/12/24/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E7%9A%84n%E4%B8%AD%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:title" content="vector与list的优缺点">
+<meta property="og:url" content="http://example.com/2024/01/01/vector%E4%B8%8Elist%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="当我们自定义类型时，深拷贝通常需要手动实现拷贝构造函数和拷贝复制运算符，我将以String为例书写出手动实现深拷贝的几种方法 下面是定义的成员函数： 1char* _str; 传统方法12345string(const string&amp; s)    :_str(new char[strlen(s._str)+1])&amp;#123;strcpy(_str,s._str);&amp;#125; 这个写法可以">
+<meta property="og:description" content="vector缺点：1、头部和中部的插入删除效率低。0(N),因为需要挪动数据2、插入数据空间不够需要增容。增容需要开新空间、拷贝数据、释放旧空间，会付出很大的代价优点：1、支持下标的随机访问。 间接的就很好的支持排序、二分查找、堆算法等等 list缺点：1、不支持随机访问。优点：1、list头部、中间插入不再需要挪动数据，效率高。0(1)2、list插入数据是新增节点，不需要增容 总结vector">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-12-24T13:37:51.000Z">
-<meta property="article:modified_time" content="2023-12-26T11:45:05.114Z">
+<meta property="article:published_time" content="2024-01-01T14:32:43.000Z">
+<meta property="article:modified_time" content="2024-01-03T13:35:28.710Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -154,33 +154,29 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-拷贝构造的n中方法" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-vector与list的优缺点" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      string手动深拷贝的传统方法与现代写法
+      vector与list的优缺点
     </h1>
   
 
         
-        <a href="/2023/12/24/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E7%9A%84n%E4%B8%AD%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2023-12-24T13:37:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-24</time>
+        <a href="/2024/01/01/vector%E4%B8%8Elist%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9/" class="archive-article-date">
+  	<time datetime="2024-01-01T14:32:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>当我们自定义类型时，深拷贝通常需要手动实现拷贝构造函数和拷贝复制运算符，我将以String为例书写出手动实现深拷贝的几种方法 下面是定义的成员函数：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">char* _str;</span><br></pre></td></tr></table></figure>
-<h2 id="传统方法"><a href="#传统方法" class="headerlink" title="传统方法"></a>传统方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">string(const string&amp; s)</span><br><span class="line">    :_str(new char[strlen(s._str)+1])</span><br><span class="line">&#123;</span><br><span class="line">strcpy(_str,s._str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个写法可以说是大部分人第一次写拷贝函数函数函数了，自己手动new一个与s._str一样大的新空间后，再让_str拷贝s._str的数据</p>
-<h2 id="现代写法"><a href="#现代写法" class="headerlink" title="现代写法"></a>现代写法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string(const string&amp; s)</span><br><span class="line">    :_str(nullptr)</span><br><span class="line">&#123;</span><br><span class="line">    string tmp(s._str);</span><br><span class="line">    swap(_str,tmp._str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>原理是我先在拷贝函数作用域里tmp一个拷贝s._str的数据，后_str与tmp._str交换，便赋值成功，而原来_str的空间数据随着tmp在出作用域时便自动掉析构函数delete了</p>
-
+        <h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><p>缺点：<br>1、头部和中部的插入删除效率低。0(N),因为需要挪动数据<br>2、插入数据空间不够需要增容。增容需要开新空间、拷贝数据、释放旧空间，会付出很大的代价<br>优点：<br>1、支持下标的随机访问。 间接的就很好的支持排序、二分查找、堆算法等等</p>
+<h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><p>缺点：<br>1、不支持随机访问。<br>优点：<br>1、list头部、中间插入不再需要挪动数据，效率高。0(1)2、list插入数据是新增节点，不需要增容</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h2 id="vector和list是相辅相成的两个容器-所以实际使用中是选择性使用的。"><a href="#vector和list是相辅相成的两个容器-所以实际使用中是选择性使用的。" class="headerlink" title="vector和list是相辅相成的两个容器,所以实际使用中是选择性使用的。"></a>vector和list是相辅相成的两个容器,所以实际使用中是选择性使用的。</h2>
       
 
       
@@ -259,7 +255,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/12/24/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E7%9A%84n%E4%B8%AD%E6%96%B9%E6%B3%95/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2024/01/01/vector%E4%B8%8Elist%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -273,18 +269,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2023/12/25/string%E7%B1%BB%E5%9E%8B%E8%B5%8B%E5%80%BC%E7%9A%84%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          string类型赋值的传统方法与现代方法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2023/12/06/c++malloc%E4%B8%8Enew/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">c++的new与c中malooc的使用方法与区别</div>
+    <a href="/2023/12/25/string%E7%B1%BB%E5%9E%8B%E8%B5%8B%E5%80%BC%E7%9A%84%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">string类型赋值的传统方法与现代方法</div>
       <i class="icon-circle-right"></i>
     </a>
   
