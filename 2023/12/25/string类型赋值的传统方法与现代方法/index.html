@@ -16,7 +16,7 @@
 <meta property="og:description" content="传统方法使用string类型赋值时，由于c++关于string的赋值是浅拷贝，需要使用重载运算符书写深拷贝，而书写string类型赋值深拷贝有传统方法和现在方法两个写法_str是string内指向储存数据指针的成员函数 传统方法12345678910string&amp; operator&#x3D;(const String &amp; s)    &amp;#123;	 if (this!&#x3D;&amp;s) &amp;#">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-12-25T15:54:31.000Z">
-<meta property="article:modified_time" content="2023-12-30T16:07:07.905Z">
+<meta property="article:modified_time" content="2024-03-17T14:02:41.975Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -177,12 +177,10 @@
         <h2 id="传统方法"><a href="#传统方法" class="headerlink" title="传统方法"></a>传统方法</h2><p>使用string类型赋值时，由于c++关于string的赋值是浅拷贝，需要使用重载运算符书写深拷贝，而书写string类型赋值深拷贝<br>有传统方法和现在方法两个写法<br>_str是string内指向储存数据指针的成员函数</p>
 <h2 id="传统方法-1"><a href="#传统方法-1" class="headerlink" title="传统方法"></a>传统方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">string&amp; operator=(const String &amp; s)</span><br><span class="line">    &#123;</span><br><span class="line">	 <span class="keyword">if</span> (this!=&amp;s) &#123;</span><br><span class="line">		 char* tmp = new char[strlen(s._str) + 1];</span><br><span class="line">		 strcpy(tmp, s._str);</span><br><span class="line">		 delete[]_str;</span><br><span class="line">		 _str=tmp;</span><br><span class="line">	 &#125;</span><br><span class="line">        <span class="built_in">return</span> *this;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
-<pre><code>   传统方法在形参和返回值反面全使用引用，并且在赋值前先检查是否是给自己赋值，避免性能的浪费，在赋值时，先创建一个大小空间与赋值数据相同的tmp,后再拷贝到tmp中，然后delete掉原来_str的空间，再让指针_str指向拷贝好的数据。
-</code></pre>
+<p>传统方法在形参和返回值反面全使用引用，并且在赋值前先检查是否是给自己赋值，避免性能的浪费，在赋值时，先创建一个大小空间与赋值数据相同的tmp,后再拷贝到tmp中，然后delete掉原来_str的空间，再让指针_str指向拷贝好的数据。</p>
 <h2 id="现代方法"><a href="#现代方法" class="headerlink" title="现代方法"></a>现代方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String&amp; operator=(String  s)</span><br><span class="line">    &#123;</span><br><span class="line">        swap(_str,s._str);</span><br><span class="line">        <span class="built_in">return</span> *this;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
-<pre><code>    赋值的现在方法相比拷贝构造的现在方法更加过分，简化到只剩两行代码，相比于赋值的传统方法，在形参上取消引用，直接在形参上创造一个新string类s，s与属于独立的空间，并且出了函数作用域会自动调用析构函数，所以只需要让_str与s._str交换便可。
-</code></pre>
+<p>赋值的现在方法相比拷贝构造的现在方法更加过分，简化到只剩两行代码，相比于赋值的传统方法，在形参上取消引用，直接在形参上创造一个新string类s，s与属于独立的空间，并且出了函数作用域会自动调用析构函数，所以只需要让_str与s._str交换便可。</p>
 <h2 id="现代方法与传统方法的区别"><a href="#现代方法与传统方法的区别" class="headerlink" title="现代方法与传统方法的区别"></a>现代方法与传统方法的区别</h2><p>现代方法相对与传统方法并没有函数运行上改善，仅仅是使代码看起来简便，书写方便。</p>
 
       
