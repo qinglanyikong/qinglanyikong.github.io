@@ -152,6 +152,141 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-函数模版-类模版分编译为什么报错" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/">函数模版/类模版分编译为什么报错</a>
+    </h1>
+  
+
+        
+        <a href="/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/" class="archive-article-date">
+  	<time datetime="2024-03-31T14:46:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>项目工程中一般将函数或者类的声明放到.h，将函数或者类的定义放到.cpp为什么要分离编译呢?是因为方便查看和维护。<br>同样是分离编译，普通函数&#x2F;类可以，函数模板&#x2F;类模板为什么不行?<br>在编译器编译要经历四个步骤：<br><img src="/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B.jpg"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-类模版的特化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/03/31/%E7%B1%BB%E6%A8%A1%E7%89%88%E7%9A%84%E7%89%B9%E5%8C%96/">类模版的特化</a>
+    </h1>
+  
+
+        
+        <a href="/2024/03/31/%E7%B1%BB%E6%A8%A1%E7%89%88%E7%9A%84%E7%89%B9%E5%8C%96/" class="archive-article-date">
+  	<time datetime="2024-03-31T14:01:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>模版类特化允许你为模板类或模板函数提供特殊化的版本，以处理特定的类型或类型组合。</p>
+<p>有一个类模板用于处理任何类型的数组：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">template &lt;class T&gt;  </span><br><span class="line">class Array &#123;  </span><br><span class="line">    // 通用版本的实现  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="全特化"><a href="#全特化" class="headerlink" title="全特化"></a>全特化</h2><p>可以为int类型完全特化这个类模板：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">template &lt;&gt;     //相对于通用版本删除&lt;&gt;里的class T</span><br><span class="line">class Array&lt;int&gt; &#123;  //相对于通用版本在自定义变量名后加上&lt;特化类型&gt;  </span><br><span class="line">    // 专门为int类型实现的版本  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="半特化"><a href="#半特化" class="headerlink" title="半特化"></a>半特化</h2><p>部分特化是指只替换类模板的部分类型参数。这允许你针对某些类型参数的特定组合提供不同的实现。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T1&gt;  </span><br><span class="line">class Pair&lt;T1, std::string&gt; &#123;  </span><br><span class="line">    // 当T2是std::string时的实现  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="注意"><a href="#注意" class="headerlink" title="!!注意"></a>!!注意</h2><p>1、虽然特化可以提供额外的灵活性和性能，但过度使用可能导致代码变得复杂且难以维护。</p>
+<p>2、部分特化的优先级高于通用模板，但如果有多个部分特化匹配，编译器可能会因为歧义而报错。</p>
+<p>3、函数模板的特化与类模板的特化在语法上略有不同，但概念上是相似的。函数模板可以完全特化，但不能部分特化。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/03/31/%E7%B1%BB%E6%A8%A1%E7%89%88%E7%9A%84%E7%89%B9%E5%8C%96/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-非类型模版" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -301,7 +436,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="测试代码-100000个数据"><a href="#测试代码-100000个数据" class="headerlink" title="测试代码(100000个数据)"></a>测试代码(100000个数据)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; v;</span><br><span class="line">	deque&lt;int&gt; d;</span><br><span class="line">	const int n = 100000;//排序数量</span><br><span class="line">	srand(time(0));</span><br><span class="line">	<span class="keyword">for</span> (int i = 0; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		int x = rand();</span><br><span class="line">		v.push_back(x);</span><br><span class="line">		d.push_back(x);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">	size_t begin1 = clock();//记录初始时间</span><br><span class="line">	<span class="built_in">sort</span>(v.begin(), v.end());</span><br><span class="line">	size_t end1 = clock();//记录结束时间</span><br><span class="line"></span><br><span class="line">	size_t begin2 = clock();</span><br><span class="line">	<span class="built_in">sort</span>(d.begin(), d.end());</span><br><span class="line">	size_t end2 = clock();</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">endl;</span></span><br><span class="line"><span class="string">	cout &lt;&lt; end1 - begin1;  //结束时间-初始时间=运算时间</span></span><br><span class="line"><span class="string">	cout &lt;&lt; endl</span>;</span><br><span class="line">	cout &lt;&lt; <span class="string">end2 - begin2;</span></span><br></pre></td></tr></table></figure>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p><img src="/./images/queue1000.jpg"><br>数据量增加十倍</p>
+<h2 id="结果-1"><a href="#结果-1" class="headerlink" title="结果"></a>结果</h2><p><img src="/./images/1000000.jpg"></p>
+
       
 
       
@@ -639,140 +777,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2024/03/13/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8n/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vector与list的优缺点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/01/01/vector%E4%B8%8Elist%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9/">vector与list的优缺点</a>
-    </h1>
-  
-
-        
-        <a href="/2024/01/01/vector%E4%B8%8Elist%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9/" class="archive-article-date">
-  	<time datetime="2024-01-01T14:32:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><p>缺点：<br>1、头部和中部的插入删除效率低。0(N),因为需要挪动数据<br>2、插入数据空间不够需要增容。增容需要开新空间、拷贝数据、释放旧空间，会付出很大的代价<br>优点：<br>1、支持下标的随机访问。 间接的就很好的支持排序、二分查找、堆算法等等</p>
-<h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><p>缺点：<br>1、不支持随机访问。<br>优点：<br>1、list头部、中间插入不再需要挪动数据，效率高。0(1)2、list插入数据是新增节点，不需要增容</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h2 id="vector和list是相辅相成的两个容器-所以实际使用中是选择性使用的。"><a href="#vector和list是相辅相成的两个容器-所以实际使用中是选择性使用的。" class="headerlink" title="vector和list是相辅相成的两个容器,所以实际使用中是选择性使用的。"></a>vector和list是相辅相成的两个容器,所以实际使用中是选择性使用的。</h2>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/01/01/vector%E4%B8%8Elist%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-string类型赋值的传统方法与现代方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/25/string%E7%B1%BB%E5%9E%8B%E8%B5%8B%E5%80%BC%E7%9A%84%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95/">string类型赋值的传统方法与现代方法</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/25/string%E7%B1%BB%E5%9E%8B%E8%B5%8B%E5%80%BC%E7%9A%84%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2023-12-25T15:54:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="传统方法"><a href="#传统方法" class="headerlink" title="传统方法"></a>传统方法</h2><p>使用string类型赋值时，由于c++关于string的赋值是浅拷贝，需要使用重载运算符书写深拷贝，而书写string类型赋值深拷贝<br>有传统方法和现在方法两个写法<br>_str是string内指向储存数据指针的成员函数</p>
-<h2 id="传统方法-1"><a href="#传统方法-1" class="headerlink" title="传统方法"></a>传统方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">string&amp; operator=(const String &amp; s)</span><br><span class="line">    &#123;</span><br><span class="line">	 <span class="keyword">if</span> (this!=&amp;s) &#123;</span><br><span class="line">		 char* tmp = new char[strlen(s._str) + 1];</span><br><span class="line">		 strcpy(tmp, s._str);</span><br><span class="line">		 delete[]_str;</span><br><span class="line">		 _str=tmp;</span><br><span class="line">	 &#125;</span><br><span class="line">        <span class="built_in">return</span> *this;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p>传统方法在形参和返回值反面全使用引用，并且在赋值前先检查是否是给自己赋值，避免性能的浪费，在赋值时，先创建一个大小空间与赋值数据相同的tmp,后再拷贝到tmp中，然后delete掉原来_str的空间，再让指针_str指向拷贝好的数据。</p>
-<h2 id="现代方法"><a href="#现代方法" class="headerlink" title="现代方法"></a>现代方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String&amp; operator=(String  s)</span><br><span class="line">    &#123;</span><br><span class="line">        swap(_str,s._str);</span><br><span class="line">        <span class="built_in">return</span> *this;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p>赋值的现在方法相比拷贝构造的现在方法更加过分，简化到只剩两行代码，相比于赋值的传统方法，在形参上取消引用，直接在形参上创造一个新string类s，s与属于独立的空间，并且出了函数作用域会自动调用析构函数，所以只需要让_str与s._str交换便可。</p>
-<h2 id="现代方法与传统方法的区别"><a href="#现代方法与传统方法的区别" class="headerlink" title="现代方法与传统方法的区别"></a>现代方法与传统方法的区别</h2><p>现代方法相对与传统方法并没有函数运行上改善，仅仅是使代码看起来简便，书写方便。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/25/string%E7%B1%BB%E5%9E%8B%E8%B5%8B%E5%80%BC%E7%9A%84%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95/">展开全文 >></a>
         </p>
       
 
