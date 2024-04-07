@@ -6,21 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>函数模版/类模版分编译为什么报错 | Hexo</title>
+  <title>c++的继承 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="项目工程中一般将函数或者类的声明放到.h，将函数或者类的定义放到.cpp为什么要分离编译呢?是因为方便查看和维护。同样是分离编译，普通函数&#x2F;类可以，函数模板&#x2F;类模板为什么不行?在编译器编译要经历四个步骤： 问题就出在第四步链接过程，如果模板实例化在一个编译单元中创建，但在另一个需要它的编译单元中没有被引用，链接器可能找不到该实例化。这通常发生在显式实例化时。确保所有需要的模板实">
-<meta property="og:type" content="article">
-<meta property="og:title" content="函数模版&#x2F;类模版分编译为什么报错">
-<meta property="og:url" content="http://example.com/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="c++的继承">
+<meta property="og:url" content="http://example.com/2024/04/01/c-%E7%9A%84%E7%BB%A7%E6%89%BF/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="项目工程中一般将函数或者类的声明放到.h，将函数或者类的定义放到.cpp为什么要分离编译呢?是因为方便查看和维护。同样是分离编译，普通函数&#x2F;类可以，函数模板&#x2F;类模板为什么不行?在编译器编译要经历四个步骤： 问题就出在第四步链接过程，如果模板实例化在一个编译单元中创建，但在另一个需要它的编译单元中没有被引用，链接器可能找不到该实例化。这通常发生在显式实例化时。确保所有需要的模板实">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B.jpg">
-<meta property="article:published_time" content="2024-03-31T14:46:06.000Z">
-<meta property="article:modified_time" content="2024-04-07T16:27:39.343Z">
+<meta property="article:published_time" content="2024-04-01T15:02:19.000Z">
+<meta property="article:modified_time" content="2024-04-01T15:02:19.106Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -156,29 +152,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-函数模版-类模版分编译为什么报错" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-c-的继承" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      函数模版/类模版分编译为什么报错
+      c++的继承
     </h1>
   
 
         
-        <a href="/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/" class="archive-article-date">
-  	<time datetime="2024-03-31T14:46:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-31</time>
+        <a href="/2024/04/01/c-%E7%9A%84%E7%BB%A7%E6%89%BF/" class="archive-article-date">
+  	<time datetime="2024-04-01T15:02:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>项目工程中一般将函数或者类的声明放到.h，将函数或者类的定义放到.cpp为什么要分离编译呢?是因为方便查看和维护。<br>同样是分离编译，普通函数&#x2F;类可以，函数模板&#x2F;类模板为什么不行?<br>在编译器编译要经历四个步骤：<br><img src="/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B.jpg"></p>
-<p>问题就出在第四步链接过程，如果模板实例化在一个编译单元中创建，但在另一个需要它的编译单元中没有被引用，链接器可能找不到该实例化。这通常发生在显式实例化时。确保所有需要的模板实例化都被正确引用。</p>
-
+        
       
 
       
@@ -257,7 +251,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2024/04/01/c-%E7%9A%84%E7%BB%A7%E6%89%BF/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -271,18 +265,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2024/04/01/c-%E7%9A%84%E7%BB%A7%E6%89%BF/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2024/04/08/%E8%99%9A%E7%BB%A7%E6%89%BF/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          c++的继承
+          虚继承
         
       </div>
     </a>
   
   
-    <a href="/2024/03/31/%E7%B1%BB%E6%A8%A1%E7%89%88%E7%9A%84%E7%89%B9%E5%8C%96/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">类模版的特化</div>
+    <a href="/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">函数模版/类模版分编译为什么报错</div>
       <i class="icon-circle-right"></i>
     </a>
   

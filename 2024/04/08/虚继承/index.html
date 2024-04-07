@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>函数模版/类模版分编译为什么报错 | Hexo</title>
+  <title>虚继承 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="项目工程中一般将函数或者类的声明放到.h，将函数或者类的定义放到.cpp为什么要分离编译呢?是因为方便查看和维护。同样是分离编译，普通函数&#x2F;类可以，函数模板&#x2F;类模板为什么不行?在编译器编译要经历四个步骤： 问题就出在第四步链接过程，如果模板实例化在一个编译单元中创建，但在另一个需要它的编译单元中没有被引用，链接器可能找不到该实例化。这通常发生在显式实例化时。确保所有需要的模板实">
+  <meta name="description" content="在菱形继承中，如果没有使用虚继承，基类会被包含在每个从中继承的派生类中，并且在最终的派生类中，这些基类的子对象会存在多份拷贝。这不仅浪费内存，还可能导致数据不一致的问题，因为对基类的修改可能只影响其中一个拷贝，而不是所有的拷贝。使用虚继承可以解决这个问题。当在派生类中使用virtual关键字继承基类时，编译器会确保在最终的派生类中只存在一个基类的子对象实例。这意味着无论基类被继承了多少次，都只会在">
 <meta property="og:type" content="article">
-<meta property="og:title" content="函数模版&#x2F;类模版分编译为什么报错">
-<meta property="og:url" content="http://example.com/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/index.html">
+<meta property="og:title" content="虚继承">
+<meta property="og:url" content="http://example.com/2024/04/08/%E8%99%9A%E7%BB%A7%E6%89%BF/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="项目工程中一般将函数或者类的声明放到.h，将函数或者类的定义放到.cpp为什么要分离编译呢?是因为方便查看和维护。同样是分离编译，普通函数&#x2F;类可以，函数模板&#x2F;类模板为什么不行?在编译器编译要经历四个步骤： 问题就出在第四步链接过程，如果模板实例化在一个编译单元中创建，但在另一个需要它的编译单元中没有被引用，链接器可能找不到该实例化。这通常发生在显式实例化时。确保所有需要的模板实">
+<meta property="og:description" content="在菱形继承中，如果没有使用虚继承，基类会被包含在每个从中继承的派生类中，并且在最终的派生类中，这些基类的子对象会存在多份拷贝。这不仅浪费内存，还可能导致数据不一致的问题，因为对基类的修改可能只影响其中一个拷贝，而不是所有的拷贝。使用虚继承可以解决这个问题。当在派生类中使用virtual关键字继承基类时，编译器会确保在最终的派生类中只存在一个基类的子对象实例。这意味着无论基类被继承了多少次，都只会在">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B.jpg">
-<meta property="article:published_time" content="2024-03-31T14:46:06.000Z">
-<meta property="article:modified_time" content="2024-04-07T16:27:39.343Z">
+<meta property="og:image" content="http://example.com/2024/04/08/%E8%99%9A%E7%BB%A7%E6%89%BF/%E8%99%9A%E7%BB%A7%E6%89%BF20.jpg">
+<meta property="article:published_time" content="2024-04-07T16:17:17.000Z">
+<meta property="article:modified_time" content="2024-04-07T16:57:55.634Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B.jpg">
+<meta name="twitter:image" content="http://example.com/2024/04/08/%E8%99%9A%E7%BB%A7%E6%89%BF/%E8%99%9A%E7%BB%A7%E6%89%BF20.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -156,28 +156,32 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-函数模版-类模版分编译为什么报错" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-虚继承" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      函数模版/类模版分编译为什么报错
+      虚继承
     </h1>
   
 
         
-        <a href="/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/" class="archive-article-date">
-  	<time datetime="2024-03-31T14:46:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-31</time>
+        <a href="/2024/04/08/%E8%99%9A%E7%BB%A7%E6%89%BF/" class="archive-article-date">
+  	<time datetime="2024-04-07T16:17:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>项目工程中一般将函数或者类的声明放到.h，将函数或者类的定义放到.cpp为什么要分离编译呢?是因为方便查看和维护。<br>同样是分离编译，普通函数&#x2F;类可以，函数模板&#x2F;类模板为什么不行?<br>在编译器编译要经历四个步骤：<br><img src="/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B.jpg"></p>
-<p>问题就出在第四步链接过程，如果模板实例化在一个编译单元中创建，但在另一个需要它的编译单元中没有被引用，链接器可能找不到该实例化。这通常发生在显式实例化时。确保所有需要的模板实例化都被正确引用。</p>
+        <p>在菱形继承中，如果没有使用虚继承，基类会被包含在每个从中继承的派生类中，并且在最终的派生类中，这些基类的子对象会存在多份拷贝。这不仅浪费内存，还可能导致数据不一致的问题，因为对基类的修改可能只影响其中一个拷贝，而不是所有的拷贝。<br>使用虚继承可以解决这个问题。当在派生类中使用virtual关键字继承基类时，编译器会确保在最终的派生类中只存在一个基类的子对象实例。这意味着无论基类被继承了多少次，都只会在内存中存在一份基类的数据。</p>
+<p>菱形继承代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class  A &#123;</span><br><span class="line">public:</span><br><span class="line">	int _a;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class B :public A&#123;</span><br><span class="line"> public:</span><br><span class="line">	 int _b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class C :public A &#123;</span><br><span class="line">public:</span><br><span class="line">	int _c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class D: public B, public C&#123;</span><br><span class="line">	public:</span><br><span class="line">		int _d;</span><br><span class="line">&#125;;</span><br><span class="line">int main</span><br><span class="line">(</span><br><span class="line">         D d;</span><br><span class="line">	d.B::_a = 1;</span><br><span class="line">	d.C::_a = 2;</span><br><span class="line">	d._b = 3;</span><br><span class="line">	d._c = 4;</span><br><span class="line">	d._d = 5;</span><br><span class="line">	cout &lt;&lt; <span class="string">sizeof(d) &lt;&lt; endl;</span></span><br><span class="line"><span class="string">)</span></span><br></pre></td></tr></table></figure>
+<p>这是一个标准的菱形继承运行结果如下：</p>
+<p><img src="/2024/04/08/%E8%99%9A%E7%BB%A7%E6%89%BF/%E8%99%9A%E7%BB%A7%E6%89%BF20.jpg"></p>
+<h2 id="注意！"><a href="#注意！" class="headerlink" title="注意！"></a>注意！</h2><p>1、虚继承通常比非虚继承慢一些，因为编译器需要处理额外的虚函数表指针和运行时类型信息。因此，在不需要解决菱形继承问题时，应避免使用虚继承。<br>2、基类的构造函数和析构函数的调用顺序可能与非虚继承不同。这可能导致一些意外的行为，特别是在涉及到初始化顺序敏感的资源时。<br>3、在包含虚继承的类体系中，派生类的构造函数初始化列表必须显式地初始化虚基类。如果省略了对虚基类的初始化，编译器会报错。</p>
 
       
 
@@ -257,7 +261,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2024/04/08/%E8%99%9A%E7%BB%A7%E6%89%BF/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -271,18 +275,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2024/04/01/c-%E7%9A%84%E7%BB%A7%E6%89%BF/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          c++的继承
-        
-      </div>
-    </a>
   
-  
-    <a href="/2024/03/31/%E7%B1%BB%E6%A8%A1%E7%89%88%E7%9A%84%E7%89%B9%E5%8C%96/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">类模版的特化</div>
+    <a href="/2024/04/01/c-%E7%9A%84%E7%BB%A7%E6%89%BF/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">c++的继承</div>
       <i class="icon-circle-right"></i>
     </a>
   

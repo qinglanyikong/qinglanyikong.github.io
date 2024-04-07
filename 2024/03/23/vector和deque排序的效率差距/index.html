@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>vector和deque排序的效率差距 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="测试代码(100000个数据)1234567891011121314151617181920212223vector&lt;int&gt; v;	deque&lt;int&gt; d;	const int n &#x3D; 100000;&#x2F;&#x2F;排序数量	srand(time(0));	for (int i &#x3D; 0; i &lt; n; i++)	&amp;#123;		int x &#x3D; rand();		v.push_">
+  <meta name="description" content="测试代码(100000个数据)1234567891011121314151617181920212223       vector&lt;int&gt; v;deque&lt;int&gt; d;const int n &#x3D; 100000;&#x2F;&#x2F;排序数量srand(time(0));for (int i &#x3D; 0; i &lt; n; i++)&amp;#123;	int x &#x3D; rand();	v.push_">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vector和deque排序的效率差距">
 <meta property="og:url" content="http://example.com/2024/03/23/vector%E5%92%8Cdeque%E6%8E%92%E5%BA%8F%E7%9A%84%E6%95%88%E7%8E%87%E5%B7%AE%E8%B7%9D/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="测试代码(100000个数据)1234567891011121314151617181920212223vector&lt;int&gt; v;	deque&lt;int&gt; d;	const int n &#x3D; 100000;&#x2F;&#x2F;排序数量	srand(time(0));	for (int i &#x3D; 0; i &lt; n; i++)	&amp;#123;		int x &#x3D; rand();		v.push_">
+<meta property="og:description" content="测试代码(100000个数据)1234567891011121314151617181920212223       vector&lt;int&gt; v;deque&lt;int&gt; d;const int n &#x3D; 100000;&#x2F;&#x2F;排序数量srand(time(0));for (int i &#x3D; 0; i &lt; n; i++)&amp;#123;	int x &#x3D; rand();	v.push_">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/queue1000.jpg">
 <meta property="og:image" content="http://example.com/images/1000000.jpg">
 <meta property="article:published_time" content="2024-03-23T15:31:54.000Z">
-<meta property="article:modified_time" content="2024-03-31T15:08:51.782Z">
+<meta property="article:modified_time" content="2024-04-01T14:49:32.351Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/queue1000.jpg">
@@ -177,9 +177,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="测试代码-100000个数据"><a href="#测试代码-100000个数据" class="headerlink" title="测试代码(100000个数据)"></a>测试代码(100000个数据)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt; v;</span><br><span class="line">	deque&lt;int&gt; d;</span><br><span class="line">	const int n = 100000;//排序数量</span><br><span class="line">	srand(time(0));</span><br><span class="line">	<span class="keyword">for</span> (int i = 0; i &lt; n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		int x = rand();</span><br><span class="line">		v.push_back(x);</span><br><span class="line">		d.push_back(x);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">	size_t begin1 = clock();//记录初始时间</span><br><span class="line">	<span class="built_in">sort</span>(v.begin(), v.end());</span><br><span class="line">	size_t end1 = clock();//记录结束时间</span><br><span class="line"></span><br><span class="line">	size_t begin2 = clock();</span><br><span class="line">	<span class="built_in">sort</span>(d.begin(), d.end());</span><br><span class="line">	size_t end2 = clock();</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; <span class="string">endl;</span></span><br><span class="line"><span class="string">	cout &lt;&lt; end1 - begin1;  //结束时间-初始时间=运算时间</span></span><br><span class="line"><span class="string">	cout &lt;&lt; endl</span>;</span><br><span class="line">	cout &lt;&lt; <span class="string">end2 - begin2;</span></span><br></pre></td></tr></table></figure>
+        <h2 id="测试代码-100000个数据"><a href="#测试代码-100000个数据" class="headerlink" title="测试代码(100000个数据)"></a>测试代码(100000个数据)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">       vector&lt;int&gt; v;</span><br><span class="line">deque&lt;int&gt; d;</span><br><span class="line">const int n = 100000;//排序数量</span><br><span class="line">srand(time(0));</span><br><span class="line"><span class="keyword">for</span> (int i = 0; i &lt; n; i++)</span><br><span class="line">&#123;</span><br><span class="line">	int x = rand();</span><br><span class="line">	v.push_back(x);</span><br><span class="line">	d.push_back(x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">size_t begin1 = clock();//记录初始时间</span><br><span class="line"><span class="built_in">sort</span>(v.begin(), v.end());</span><br><span class="line">size_t end1 = clock();//记录结束时间</span><br><span class="line"></span><br><span class="line">size_t begin2 = clock();</span><br><span class="line"><span class="built_in">sort</span>(d.begin(), d.end());</span><br><span class="line">size_t end2 = clock();</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">endl;</span></span><br><span class="line"><span class="string">cout &lt;&lt; end1 - begin1;  //结束时间-初始时间=运算时间</span></span><br><span class="line"><span class="string">cout &lt;&lt; endl</span>;</span><br><span class="line">cout &lt;&lt; <span class="string">end2 - begin2;</span></span><br></pre></td></tr></table></figure>
 <h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p><img src="/./images/queue1000.jpg"><br>数据量增加十倍</p>
 <h2 id="结果-1"><a href="#结果-1" class="headerlink" title="结果"></a>结果</h2><p><img src="/./images/1000000.jpg"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>std::vector 和 std::deque 在排序效率方面的差距主要取决于排序算法的需求和数据的特性。在大多数情况下，std::vector 由于其高效的随机访问能力，可能会是排序操作的更好选择。但在某些特定场景下，std::deque 也可能表现出优势。因此，在选择容器时，需要根据实际应用的需求和场景来权衡利弊。</p>
 
       
 
@@ -489,7 +490,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">再学七年&lt;br&gt;&lt;br&gt;不行就摆烂</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">沉光落叶泥中事&lt;br&gt;&lt;br&gt;秋风吹散百年愁</div>
   	  	
     	</section>
     
