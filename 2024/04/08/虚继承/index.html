@@ -15,12 +15,16 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="在菱形继承中，如果没有使用虚继承，基类会被包含在每个从中继承的派生类中，并且在最终的派生类中，这些基类的子对象会存在多份拷贝。这不仅浪费内存，还可能导致数据不一致的问题，因为对基类的修改可能只影响其中一个拷贝，而不是所有的拷贝。使用虚继承可以解决这个问题。当在派生类中使用virtual关键字继承基类时，编译器会确保在最终的派生类中只存在一个基类的子对象实例。这意味着无论基类被继承了多少次，都只会在">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2024/04/08/%E8%99%9A%E7%BB%A7%E6%89%BF/%E8%99%9A%E7%BB%A7%E6%89%BF20.jpg">
+<meta property="og:image" content="http://example.com/images/%E8%99%9A%E7%BB%A7%E6%89%BF20.jpg">
+<meta property="og:image" content="http://example.com/images/%E8%99%9A%E7%BB%A7%E6%89%BF%E5%86%85%E5%AD%98.jpg">
+<meta property="og:image" content="http://example.com/images/virtual.jpg">
+<meta property="og:image" content="http://example.com/images/virtual1000.jpg">
+<meta property="og:image" content="http://example.com/images/virtual10001.jpg">
 <meta property="article:published_time" content="2024-04-07T16:17:17.000Z">
-<meta property="article:modified_time" content="2024-04-07T16:57:55.634Z">
+<meta property="article:modified_time" content="2024-04-08T15:12:28.610Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/04/08/%E8%99%9A%E7%BB%A7%E6%89%BF/%E8%99%9A%E7%BB%A7%E6%89%BF20.jpg">
+<meta name="twitter:image" content="http://example.com/images/%E8%99%9A%E7%BB%A7%E6%89%BF20.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -178,9 +182,18 @@
       
         <p>在菱形继承中，如果没有使用虚继承，基类会被包含在每个从中继承的派生类中，并且在最终的派生类中，这些基类的子对象会存在多份拷贝。这不仅浪费内存，还可能导致数据不一致的问题，因为对基类的修改可能只影响其中一个拷贝，而不是所有的拷贝。<br>使用虚继承可以解决这个问题。当在派生类中使用virtual关键字继承基类时，编译器会确保在最终的派生类中只存在一个基类的子对象实例。这意味着无论基类被继承了多少次，都只会在内存中存在一份基类的数据。</p>
 <p>菱形继承代码如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class  A &#123;</span><br><span class="line">public:</span><br><span class="line">	int _a;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class B :public A&#123;</span><br><span class="line"> public:</span><br><span class="line">	 int _b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class C :public A &#123;</span><br><span class="line">public:</span><br><span class="line">	int _c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class D: public B, public C&#123;</span><br><span class="line">	public:</span><br><span class="line">		int _d;</span><br><span class="line">&#125;;</span><br><span class="line">int main</span><br><span class="line">(</span><br><span class="line">         D d;</span><br><span class="line">	d.B::_a = 1;</span><br><span class="line">	d.C::_a = 2;</span><br><span class="line">	d._b = 3;</span><br><span class="line">	d._c = 4;</span><br><span class="line">	d._d = 5;</span><br><span class="line">	cout &lt;&lt; <span class="string">sizeof(d) &lt;&lt; endl;</span></span><br><span class="line"><span class="string">)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class  A &#123;</span><br><span class="line">public:</span><br><span class="line">	int _a;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class B :virtual public A&#123;</span><br><span class="line"> public:</span><br><span class="line">	 int _b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class C :virtualpublic A &#123;</span><br><span class="line">public:</span><br><span class="line">	int _c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class D: public B, public C&#123;</span><br><span class="line">	public:</span><br><span class="line">		int _d;</span><br><span class="line">&#125;;</span><br><span class="line">int main</span><br><span class="line">(</span><br><span class="line">         D d;</span><br><span class="line">	d.B::_a = 1;</span><br><span class="line">	d.C::_a = 2;</span><br><span class="line">	d._b = 3;</span><br><span class="line">	d._c = 4;</span><br><span class="line">	d._d = 5;</span><br><span class="line">	cout &lt;&lt; <span class="string">sizeof(d) &lt;&lt; endl;</span></span><br><span class="line"><span class="string">)</span></span><br></pre></td></tr></table></figure>
 <p>这是一个标准的菱形继承运行结果如下：</p>
-<p><img src="/2024/04/08/%E8%99%9A%E7%BB%A7%E6%89%BF/%E8%99%9A%E7%BB%A7%E6%89%BF20.jpg"></p>
+<p><img src="/./images/%E8%99%9A%E7%BB%A7%E6%89%BF20.jpg"><br>数据内存分布如下：</p>
+<p><img src="/./images/%E8%99%9A%E7%BB%A7%E6%89%BF%E5%86%85%E5%AD%98.jpg"></p>
+<p>加上虚继承后代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class  A &#123;</span><br><span class="line">public:</span><br><span class="line">	int _a;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class B :virtual public A&#123;</span><br><span class="line"> public:</span><br><span class="line">	 int _b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class C :virtual public A &#123;</span><br><span class="line">public:</span><br><span class="line">	int _c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">class D: public B, public C&#123;</span><br><span class="line">	public:</span><br><span class="line">		int _d;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<p><img src="/./images/virtual.jpg"></p>
+<p>数据内存分布如下</p>
+<p>我们发现在加上虚继承后，D的大小成了24，原本自定义类型B和自定义类型C共同成员_a在内存中储存的是指针，此时_a成了虚基类，而内促指针指向的地址是续基表，而虚基表的中的数据是偏移量。<br>这时我们发现因为多了一份_a,内存并没有减少反而增加,这是因为_a的大小仅仅4个字节，但当把_a从int类改为int[1000]时节省的数据就多了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class  A &#123;</span><br><span class="line">public:</span><br><span class="line">	int *_a[1000];  //修改A中成员类型</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>没有虚继承结果如图<br><img src="/./images/virtual1000.jpg"><br>虚继承结果如图<br><img src="/./images/virtual10001.jpg"></p>
 <h2 id="注意！"><a href="#注意！" class="headerlink" title="注意！"></a>注意！</h2><p>1、虚继承通常比非虚继承慢一些，因为编译器需要处理额外的虚函数表指针和运行时类型信息。因此，在不需要解决菱形继承问题时，应避免使用虚继承。<br>2、基类的构造函数和析构函数的调用顺序可能与非虚继承不同。这可能导致一些意外的行为，特别是在涉及到初始化顺序敏感的资源时。<br>3、在包含虚继承的类体系中，派生类的构造函数初始化列表必须显式地初始化虚基类。如果省略了对虚基类的初始化，编译器会报错。</p>
 
       
@@ -274,6 +287,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2024/04/09/%E8%99%9A%E5%87%BD%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          虚函数
+        
+      </div>
+    </a>
   
   
     <a href="/2024/04/01/c-%E7%9A%84%E7%BB%A7%E6%89%BF/" id="article-nav-older" class="article-nav-link-wrap">
