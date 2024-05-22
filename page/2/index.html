@@ -152,6 +152,204 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-c-的继承" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/04/01/c-%E7%9A%84%E7%BB%A7%E6%89%BF/">c++的继承</a>
+    </h1>
+  
+
+        
+        <a href="/2024/04/01/c-%E7%9A%84%E7%BB%A7%E6%89%BF/" class="archive-article-date">
+  	<time datetime="2024-04-01T15:02:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/04/01/c-%E7%9A%84%E7%BB%A7%E6%89%BF/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-函数模版-类模版分编译为什么报错" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/">函数模版/类模版分编译为什么报错</a>
+    </h1>
+  
+
+        
+        <a href="/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/" class="archive-article-date">
+  	<time datetime="2024-03-31T14:46:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>项目工程中一般将函数或者类的声明放到.h，将函数或者类的定义放到.cpp为什么要分离编译呢?是因为方便查看和维护。<br>同样是分离编译，普通函数&#x2F;类可以，函数模板&#x2F;类模板为什么不行?<br>在编译器编译要经历四个步骤：<br><img src="/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B.jpg"></p>
+<p>问题就出在第四步链接过程，如果模板实例化在一个编译单元中创建，但在另一个需要它的编译单元中没有被引用，链接器可能找不到该实例化。这通常发生在显式实例化时。确保所有需要的模板实例化都被正确引用。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/03/31/%E5%87%BD%E6%95%B0%E6%A8%A1%E7%89%88-%E7%B1%BB%E6%A8%A1%E7%89%88%E5%88%86%E7%BC%96%E8%AF%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%A5%E9%94%99/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-类模版的特化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/03/31/%E7%B1%BB%E6%A8%A1%E7%89%88%E7%9A%84%E7%89%B9%E5%8C%96/">类模版的特化</a>
+    </h1>
+  
+
+        
+        <a href="/2024/03/31/%E7%B1%BB%E6%A8%A1%E7%89%88%E7%9A%84%E7%89%B9%E5%8C%96/" class="archive-article-date">
+  	<time datetime="2024-03-31T14:01:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>模版类特化允许你为模板类或模板函数提供特殊化的版本，以处理特定的类型或类型组合。</p>
+<p>有一个类模板用于处理任何类型的数组：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">template &lt;class T&gt;  </span><br><span class="line">class Array &#123;  </span><br><span class="line">    // 通用版本的实现  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="全特化"><a href="#全特化" class="headerlink" title="全特化"></a>全特化</h2><p>可以为int类型完全特化这个类模板：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">template &lt;&gt;     //相对于通用版本删除&lt;&gt;里的class T</span><br><span class="line">class Array&lt;int&gt; &#123;  //相对于通用版本在自定义变量名后加上&lt;特化类型&gt;  </span><br><span class="line">    // 专门为int类型实现的版本  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="半特化"><a href="#半特化" class="headerlink" title="半特化"></a>半特化</h2><p>部分特化是指只替换类模板的部分类型参数。这允许你针对某些类型参数的特定组合提供不同的实现。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T1&gt;  </span><br><span class="line">class Pair&lt;T1, std::string&gt; &#123;  </span><br><span class="line">    // 当T2是std::string时的实现  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="注意"><a href="#注意" class="headerlink" title="!!注意"></a>!!注意</h2><p>1、虽然特化可以提供额外的灵活性和性能，但过度使用可能导致代码变得复杂且难以维护。</p>
+<p>2、部分特化的优先级高于通用模板，但如果有多个部分特化匹配，编译器可能会因为歧义而报错。</p>
+<p>3、函数模板的特化与类模板的特化在语法上略有不同，但概念上是相似的。函数模板可以完全特化，但不能部分特化。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/03/31/%E7%B1%BB%E6%A8%A1%E7%89%88%E7%9A%84%E7%89%B9%E5%8C%96/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-非类型模版" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -238,8 +436,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="向下遍历–大堆"><a href="#向下遍历–大堆" class="headerlink" title="向下遍历–大堆"></a>向下遍历–大堆</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">void AdjustDown(int*_con,int root)</span><br><span class="line">   &#123;</span><br><span class="line">       int parent = root;</span><br><span class="line">       int child = parent * 2 - 1;</span><br><span class="line">       <span class="keyword">while</span> (child&lt;_con.size())</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="keyword">if</span> (child + 1 &lt; _con.size() &amp;&amp; _con[child + 1] &gt; _con[child])</span><br><span class="line">           &#123;</span><br><span class="line">               ++child;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">if</span> (_con[child] &gt; _con[parent])</span><br><span class="line">           &#123;</span><br><span class="line">               swap(_con[child], _con[parent]);</span><br><span class="line">               parent = child;</span><br><span class="line">               child = parent * 2 + 1;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">else</span></span><br><span class="line">           &#123;</span><br><span class="line">               <span class="built_in">break</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="向上遍历–大堆"><a href="#向上遍历–大堆" class="headerlink" title="向上遍历–大堆"></a>向上遍历–大堆</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">void AdjustUp(int*_con,int child)</span><br><span class="line">    &#123;</span><br><span class="line">        Comapare com;</span><br><span class="line">        int parent = (child - 1) / 2;</span><br><span class="line">        <span class="keyword">while</span> (child &gt; 0)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (com(_con[parent],_con[child]))</span><br><span class="line">            &#123;</span><br><span class="line">                swap(_con[parent], _con[child]);</span><br><span class="line">                child = parent;</span><br><span class="line">                parent = (child - 1) / 2;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="向下遍历–大堆"><a href="#向下遍历–大堆" class="headerlink" title="向下遍历–大堆"></a>向下遍历–大堆</h2><p>当从堆中删除元素（通常是根节点）时，为了保持堆的性质，需要从堆的末尾取一个元素（通常是数组的最后一个元素）并将其放置在根节点的位置。<br>但是，这个新放置的根节点可能违反堆的性质，因为它可能比其一个或多个子节点小。<br>为了恢复堆的性质，该根节点需要与其较大的子节点进行比较并交换（如果有必要的话）。这个过程会一直持续，直到该节点到达正确的位置，或者成为一个叶节点（即没有子节点的节点）。这个过程可以被视为一种“向下遍历”或“下沉”，因为根节点可能从其初始位置向下移动到堆的更低位置。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">void AdjustDown(int*_con,int root)</span><br><span class="line">   &#123;</span><br><span class="line">       int parent = root;</span><br><span class="line">       int child = parent * 2 - 1;</span><br><span class="line">       <span class="keyword">while</span> (child&lt;_con.size())</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="keyword">if</span> (child + 1 &lt; _con.size() &amp;&amp; _con[child + 1] &gt; _con[child])</span><br><span class="line">           &#123;</span><br><span class="line">               ++child;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">if</span> (_con[child] &gt; _con[parent])</span><br><span class="line">           &#123;</span><br><span class="line">               swap(_con[child], _con[parent]);</span><br><span class="line">               parent = child;</span><br><span class="line">               child = parent * 2 + 1;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">else</span></span><br><span class="line">           &#123;</span><br><span class="line">               <span class="built_in">break</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="向上遍历–大堆"><a href="#向上遍历–大堆" class="headerlink" title="向上遍历–大堆"></a>向上遍历–大堆</h2><p>当一个新元素插入到堆中时，由于它首先被放置在堆的末尾（通常是数组的末尾），所以它可能违反堆的性质（即父节点的值大于或等于其子节点的值）。<br>为了恢复堆的性质，该新元素需要与其父节点进行比较。如果新元素大于其父节点，它们会交换位置。这个过程会一直持续到新元素到达正确的位置，或者到达堆的顶部（即根节点）。这个过程可以被视为一种“向上遍历”或“上浮”，因为新元素可能从其初始位置向上移动到堆的更高位置。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">void AdjustUp(int*_con,int child)</span><br><span class="line">    &#123;</span><br><span class="line">        Comapare com;</span><br><span class="line">        int parent = (child - 1) / 2;</span><br><span class="line">        <span class="keyword">while</span> (child &gt; 0)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (com(_con[parent],_con[child]))</span><br><span class="line">            &#123;</span><br><span class="line">                swap(_con[parent], _con[child]);</span><br><span class="line">                child = parent;</span><br><span class="line">                parent = (child - 1) / 2;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -572,211 +772,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2024/03/17/lsit%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%9A%84%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-初始化列表n" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/03/13/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8n/">C语言初始化列表：深入了解与实用技巧</a>
-    </h1>
-  
-
-        
-        <a href="/2024/03/13/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8n/" class="archive-article-date">
-  	<time datetime="2024-03-13T14:56:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在C语言中，初始化列表是一种用于在变量声明时直接为其赋初值的方式。这种技术不仅提高了代码的可读性，还有助于避免一些潜在的错误。</p>
-<h2 id="什么是初始化列表？"><a href="#什么是初始化列表？" class="headerlink" title="什么是初始化列表？"></a>什么是初始化列表？</h2><p>初始化列表是一种在声明变量时直接为其赋初值的语法结构。在C语言中，我们可以使用初始化列表为数组、结构体等复合类型赋初值。</p>
-<h2 id="初始化列表的使用"><a href="#初始化列表的使用" class="headerlink" title="初始化列表的使用"></a>初始化列表的使用</h2><p>在学习构造函数时，最初学习的用初始化函数初始化成员时我们使用的如下的方法：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">struct Data</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">    Data(const int&amp; x = 0)</span><br><span class="line">    &#123;</span><br><span class="line">        a = x;</span><br><span class="line">    &#125;</span><br><span class="line">private: </span><br><span class="line">    int a;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>这种方法存在明显的缺陷，如果成员函数有一下三种形式时将会报错：<br>1、const类型<br>2、类型引用<br>3、class自定用类型<br>const类行和引用类型时需要在定义时初始化。而class自定义类型中成员如果时private类型也只能在定义时初始化，无法定义后修改</p>
-<p>这时就要使用我们的初始化。<br>使用方法如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Data</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">	Data(int a = 1, int b = 2, int c = 4)</span><br><span class="line">	&#123;</span><br><span class="line">		_a = a;</span><br><span class="line">		_b = b;</span><br><span class="line">		_c = c;</span><br><span class="line">	&#125;</span><br><span class="line">private:</span><br><span class="line">	int _a;</span><br><span class="line">	int  _b;</span><br><span class="line">	int  _c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct Date</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">	Date( int x = 0)</span><br><span class="line">		:a(x),</span><br><span class="line">		b(x),</span><br><span class="line">		d(1,2,3)</span><br><span class="line">	&#123;&#125;</span><br><span class="line">private:</span><br><span class="line">	const int a;</span><br><span class="line">	int&amp; b;</span><br><span class="line">	Data d;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>初始化列表可以提高了代码的可读性和灵活性，初始化列表是C语言中一种非常实用的特性，它不仅可以提高代码的可读性和可维护性，还能帮助我们避免一些潜在的错误。</p>
-<h2 id="注意！！！"><a href="#注意！！！" class="headerlink" title="注意！！！"></a>注意！！！</h2><p>一定要保证，成员变量在类中的声明和次序和初始化列表中的初始化顺序一致</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/03/13/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8n/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vector与list的优缺点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/01/01/vector%E4%B8%8Elist%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9/">vector与list的优缺点</a>
-    </h1>
-  
-
-        
-        <a href="/2024/01/01/vector%E4%B8%8Elist%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9/" class="archive-article-date">
-  	<time datetime="2024-01-01T14:32:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><p>缺点：<br>1、头部和中部的插入删除效率低。0(N),因为需要挪动数据<br>2、插入数据空间不够需要增容。增容需要开新空间、拷贝数据、释放旧空间，会付出很大的代价<br>优点：<br>1、支持下标的随机访问。 间接的就很好的支持排序、二分查找、堆算法等等</p>
-<h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><p>缺点：<br>1、不支持随机访问。<br>优点：<br>1、list头部、中间插入不再需要挪动数据，效率高。0(1)2、list插入数据是新增节点，不需要增容</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h2 id="vector和list是相辅相成的两个容器-所以实际使用中是选择性使用的。"><a href="#vector和list是相辅相成的两个容器-所以实际使用中是选择性使用的。" class="headerlink" title="vector和list是相辅相成的两个容器,所以实际使用中是选择性使用的。"></a>vector和list是相辅相成的两个容器,所以实际使用中是选择性使用的。</h2>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/01/01/vector%E4%B8%8Elist%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-string类型赋值的传统方法与现代方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/25/string%E7%B1%BB%E5%9E%8B%E8%B5%8B%E5%80%BC%E7%9A%84%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95/">string类型赋值的传统方法与现代方法</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/25/string%E7%B1%BB%E5%9E%8B%E8%B5%8B%E5%80%BC%E7%9A%84%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2023-12-25T15:54:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="传统方法"><a href="#传统方法" class="headerlink" title="传统方法"></a>传统方法</h2><p>使用string类型赋值时，由于c++关于string的赋值是浅拷贝，需要使用重载运算符书写深拷贝，而书写string类型赋值深拷贝<br>有传统方法和现在方法两个写法<br>_str是string内指向储存数据指针的成员函数</p>
-<h2 id="传统方法-1"><a href="#传统方法-1" class="headerlink" title="传统方法"></a>传统方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">string&amp; operator=(const String &amp; s)</span><br><span class="line">    &#123;</span><br><span class="line">	 <span class="keyword">if</span> (this!=&amp;s) &#123;</span><br><span class="line">		 char* tmp = new char[strlen(s._str) + 1];</span><br><span class="line">		 strcpy(tmp, s._str);</span><br><span class="line">		 delete[]_str;</span><br><span class="line">		 _str=tmp;</span><br><span class="line">	 &#125;</span><br><span class="line">        <span class="built_in">return</span> *this;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p>传统方法在形参和返回值反面全使用引用，并且在赋值前先检查是否是给自己赋值，避免性能的浪费，在赋值时，先创建一个大小空间与赋值数据相同的tmp,后再拷贝到tmp中，然后delete掉原来_str的空间，再让指针_str指向拷贝好的数据。</p>
-<h2 id="现代方法"><a href="#现代方法" class="headerlink" title="现代方法"></a>现代方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String&amp; operator=(String  s)</span><br><span class="line">    &#123;</span><br><span class="line">        swap(_str,s._str);</span><br><span class="line">        <span class="built_in">return</span> *this;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p>赋值的现在方法相比拷贝构造的现在方法更加过分，简化到只剩两行代码，相比于赋值的传统方法，在形参上取消引用，直接在形参上创造一个新string类s，s与属于独立的空间，并且出了函数作用域会自动调用析构函数，所以只需要让_str与s._str交换便可。</p>
-<h2 id="现代方法与传统方法的区别"><a href="#现代方法与传统方法的区别" class="headerlink" title="现代方法与传统方法的区别"></a>现代方法与传统方法的区别</h2><p>现代方法相对与传统方法并没有函数运行上改善，仅仅是使代码看起来简便，书写方便。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/25/string%E7%B1%BB%E5%9E%8B%E8%B5%8B%E5%80%BC%E7%9A%84%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95/">展开全文 >></a>
         </p>
       
 

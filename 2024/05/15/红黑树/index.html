@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hexo</title>
+  <title>实现一个简单的红黑树（RBTree）并进行中序遍历检查 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/page/3/index.html">
+  <meta name="description" content="红黑树的性质1、每个节点要么是红色，要么是黑色2、根节点是黑色的。3、每个叶节点（NIL或空节点）是黑色的。4、如果一个节点是红色的，则它的两个子节点都是黑色的（从每个叶子到根的所有路径上不能有两个连续的红色节点）。5、对于每个节点，从该节点到其所有后代叶节点的简单路径上，均包含相同数目的黑色节点。 实现红黑树首先，我们定义一个Colour枚举和RBTreeNode结构来表示红黑树的节点： 123">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实现一个简单的红黑树（RBTree）并进行中序遍历检查">
+<meta property="og:url" content="http://example.com/2024/05/15/%E7%BA%A2%E9%BB%91%E6%A0%91/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="红黑树的性质1、每个节点要么是红色，要么是黑色2、根节点是黑色的。3、每个叶节点（NIL或空节点）是黑色的。4、如果一个节点是红色的，则它的两个子节点都是黑色的（从每个叶子到根的所有路径上不能有两个连续的红色节点）。5、对于每个节点，从该节点到其所有后代叶节点的简单路径上，均包含相同数目的黑色节点。 实现红黑树首先，我们定义一个Colour枚举和RBTreeNode结构来表示红黑树的节点： 123">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-05-15T13:13:26.000Z">
+<meta property="article:modified_time" content="2024-05-15T14:47:00.590Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -150,40 +154,58 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-初始化列表n" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-红黑树" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/03/13/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8n/">C语言初始化列表：深入了解与实用技巧</a>
+    <h1 class="article-title" itemprop="name">
+      实现一个简单的红黑树（RBTree）并进行中序遍历检查
     </h1>
   
 
         
-        <a href="/2024/03/13/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8n/" class="archive-article-date">
-  	<time datetime="2024-03-13T14:56:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-13</time>
+        <a href="/2024/05/15/%E7%BA%A2%E9%BB%91%E6%A0%91/" class="archive-article-date">
+  	<time datetime="2024-05-15T13:13:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-05-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在C语言中，初始化列表是一种用于在变量声明时直接为其赋初值的方式。这种技术不仅提高了代码的可读性，还有助于避免一些潜在的错误。</p>
-<h2 id="什么是初始化列表？"><a href="#什么是初始化列表？" class="headerlink" title="什么是初始化列表？"></a>什么是初始化列表？</h2><p>初始化列表是一种在声明变量时直接为其赋初值的语法结构。在C语言中，我们可以使用初始化列表为数组、结构体等复合类型赋初值。</p>
-<h2 id="初始化列表的使用"><a href="#初始化列表的使用" class="headerlink" title="初始化列表的使用"></a>初始化列表的使用</h2><p>在学习构造函数时，最初学习的用初始化函数初始化成员时我们使用的如下的方法：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">struct Data</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">    Data(const int&amp; x = 0)</span><br><span class="line">    &#123;</span><br><span class="line">        a = x;</span><br><span class="line">    &#125;</span><br><span class="line">private: </span><br><span class="line">    int a;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>这种方法存在明显的缺陷，如果成员函数有一下三种形式时将会报错：<br>1、const类型<br>2、类型引用<br>3、class自定用类型<br>const类行和引用类型时需要在定义时初始化。而class自定义类型中成员如果时private类型也只能在定义时初始化，无法定义后修改</p>
-<p>这时就要使用我们的初始化。<br>使用方法如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class Data</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">	Data(int a = 1, int b = 2, int c = 4)</span><br><span class="line">	&#123;</span><br><span class="line">		_a = a;</span><br><span class="line">		_b = b;</span><br><span class="line">		_c = c;</span><br><span class="line">	&#125;</span><br><span class="line">private:</span><br><span class="line">	int _a;</span><br><span class="line">	int  _b;</span><br><span class="line">	int  _c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct Date</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">	Date( int x = 0)</span><br><span class="line">		:a(x),</span><br><span class="line">		b(x),</span><br><span class="line">		d(1,2,3)</span><br><span class="line">	&#123;&#125;</span><br><span class="line">private:</span><br><span class="line">	const int a;</span><br><span class="line">	int&amp; b;</span><br><span class="line">	Data d;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>初始化列表可以提高了代码的可读性和灵活性，初始化列表是C语言中一种非常实用的特性，它不仅可以提高代码的可读性和可维护性，还能帮助我们避免一些潜在的错误。</p>
-<h2 id="注意！！！"><a href="#注意！！！" class="headerlink" title="注意！！！"></a>注意！！！</h2><p>一定要保证，成员变量在类中的声明和次序和初始化列表中的初始化顺序一致</p>
+        <h2 id="红黑树的性质"><a href="#红黑树的性质" class="headerlink" title="红黑树的性质"></a>红黑树的性质</h2><p>1、每个节点要么是红色，要么是黑色<br>2、根节点是黑色的。<br>3、每个叶节点（NIL或空节点）是黑色的。<br>4、如果一个节点是红色的，则它的两个子节点都是黑色的（从每个叶子到根的所有路径上不能有两个连续的红色节点）。<br>5、对于每个节点，从该节点到其所有后代叶节点的简单路径上，均包含相同数目的黑色节点。</p>
+<h2 id="实现红黑树"><a href="#实现红黑树" class="headerlink" title="实现红黑树"></a>实现红黑树</h2><p>首先，我们定义一个Colour枚举和RBTreeNode结构来表示红黑树的节点：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">enum Colour</span><br><span class="line">&#123;</span><br><span class="line">	BLACK,</span><br><span class="line">	RED,</span><br><span class="line">&#125;;</span><br><span class="line">template&lt;class K, class V&gt;</span><br><span class="line">struct RBTreeNode</span><br><span class="line">&#123;</span><br><span class="line">	RBTreeNode &lt;K, V&gt;* _left;</span><br><span class="line">	RBTreeNode&lt;K, V&gt;* _right;</span><br><span class="line">	RBTreeNode&lt;K, V&gt;* _parent;</span><br><span class="line">	pair &lt;K, V&gt; _kv;</span><br><span class="line">	Colour  _col;</span><br><span class="line">	RBTreeNode(const pair&lt;K, V&gt;&amp; kv)</span><br><span class="line">		:_left(nullptr)</span><br><span class="line">		,_right(nullptr)</span><br><span class="line">		,_parent(nullptr)</span><br><span class="line">		,_kv(kv)</span><br><span class="line">		</span><br><span class="line">	&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="1插入新节点"><a href="#1插入新节点" class="headerlink" title="1插入新节点"></a>1插入新节点</h2><p>首先，我们像普通二叉搜索树一样插入新节点，并将其颜色设置为红色。由于新节点是红色的，这可能会违反性质4（红色节点的子节点也应该是黑色的）。</p>
+<h2 id="2-修复红黑树的性质"><a href="#2-修复红黑树的性质" class="headerlink" title="2.修复红黑树的性质"></a>2.修复红黑树的性质</h2><h3 id="步骤1：-从插入的节点开始，向上遍历直到根节点或遇到一个黑色的父节点。在遍历过程中，我们记录当前节点、其父节点和祖父节点。"><a href="#步骤1：-从插入的节点开始，向上遍历直到根节点或遇到一个黑色的父节点。在遍历过程中，我们记录当前节点、其父节点和祖父节点。" class="headerlink" title="步骤1： 从插入的节点开始，向上遍历直到根节点或遇到一个黑色的父节点。在遍历过程中，我们记录当前节点、其父节点和祖父节点。"></a>步骤1： 从插入的节点开始，向上遍历直到根节点或遇到一个黑色的父节点。在遍历过程中，我们记录当前节点、其父节点和祖父节点。</h3><h3 id="步骤2：-检查当前节点的父节点和叔叔节点（祖父节点的另一个子节点）的颜色。"><a href="#步骤2：-检查当前节点的父节点和叔叔节点（祖父节点的另一个子节点）的颜色。" class="headerlink" title="步骤2： 检查当前节点的父节点和叔叔节点（祖父节点的另一个子节点）的颜色。"></a>步骤2： 检查当前节点的父节点和叔叔节点（祖父节点的另一个子节点）的颜色。</h3><p>情况1： 如果父节点和叔叔节点都是红色的（违反性质4），则执行以下操作：<br>将父节点和叔叔节点涂成黑色。<br>将祖父节点涂成红色。<br>将当前节点设置为祖父节点，并重复步骤2（向上遍历）。<br>情况2： 如果叔叔节点是黑色的或不存在（不违反性质4），则检查当前节点是其父节点的左孩子还是右孩子。<br>情况2.1： 如果当前节点是右孩子，则执行左旋操作（以父节点为中心），将当前节点旋转到父节点的左孩子位置，并将父节点设置为当前节点。然后重复步骤2。<br>情况2.2： 如果当前节点是左孩子（或情况2.1后的情况），则执行右旋操作（以祖父节点为中心），将父节点旋转到祖父节点的右孩子位置，并将祖父节点设置为当前节点。然后更新当前节点的父节点和祖父节点的颜色（祖父节点涂成黑色，父节点涂成红色）。此时，我们已经修复了红黑树的性质，可以退出循环。</p>
+<h3 id="步骤3：-如果遍历到根节点，且根节点是红色的（违反性质2），则将根节点涂成黑色。"><a href="#步骤3：-如果遍历到根节点，且根节点是红色的（违反性质2），则将根节点涂成黑色。" class="headerlink" title="步骤3： 如果遍历到根节点，且根节点是红色的（违反性质2），则将根节点涂成黑色。"></a>步骤3： 如果遍历到根节点，且根节点是红色的（违反性质2），则将根节点涂成黑色。</h3><p>代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br></pre></td><td class="code"><pre><span class="line">template&lt;class K, class V&gt;</span><br><span class="line">class RBTree</span><br><span class="line">&#123;</span><br><span class="line">	typedef RBTreeNode&lt;K, V&gt; Node;</span><br><span class="line">public:</span><br><span class="line">	void RotateR(Node* parent)</span><br><span class="line">	&#123;</span><br><span class="line">		Node* subL = parent-&gt;_left;</span><br><span class="line">		Node* subLR = subL-&gt;_right;</span><br><span class="line"></span><br><span class="line">		parent-&gt;_right = subLR;</span><br><span class="line">		parent-&gt;_left = nullptr;</span><br><span class="line">		<span class="keyword">if</span> (subLR)</span><br><span class="line">		    subLR-&gt;_parent = parent;</span><br><span class="line">		subL-&gt;_right = parent;</span><br><span class="line">		Node* ppNode = parent-&gt;_parent;</span><br><span class="line">		parent-&gt;_parent = subL;</span><br><span class="line">		<span class="keyword">if</span> (_root == parent)</span><br><span class="line">		&#123;</span><br><span class="line">			_root = subL;</span><br><span class="line">			subL-&gt;_parent = nullptr;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (ppNode-&gt;_left == parent)</span><br><span class="line">			&#123;</span><br><span class="line">				ppNode-&gt;_left = subL;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				ppNode-&gt;_right = subL;</span><br><span class="line">			&#125;</span><br><span class="line">			subL-&gt;_parent = ppNode;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	void RotateL(Node* parent)</span><br><span class="line">	&#123;</span><br><span class="line">		Node* subR = parent-&gt;_right;</span><br><span class="line">		Node* subRL = subR-&gt;_left;</span><br><span class="line">		parent-&gt;_right = nullptr;</span><br><span class="line">		parent-&gt;_left = subRL;</span><br><span class="line">		<span class="keyword">if</span> (subRL)</span><br><span class="line">			subRL-&gt;_parent = parent;</span><br><span class="line">		subR-&gt;_left = parent;</span><br><span class="line">		Node* ppNode = parent-&gt;_parent;</span><br><span class="line">		parent-&gt;_parent = subR;</span><br><span class="line">		<span class="keyword">if</span> (parent == _root)</span><br><span class="line">		&#123;</span><br><span class="line">			_root = subR;</span><br><span class="line">			subR-&gt;_parent = nullptr;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (ppNode-&gt;_left == parent)</span><br><span class="line">			&#123;</span><br><span class="line">				ppNode-&gt;_left = subR;</span><br><span class="line">				subR-&gt;_parent = ppNode;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				ppNode-&gt;_right = subR;</span><br><span class="line">				subR-&gt;_parent = ppNode;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	bool Insert(pair&lt;K, V&gt; kv)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (_root == nullptr)</span><br><span class="line">		&#123;</span><br><span class="line">			_root = new Node(kv);</span><br><span class="line">			_root-&gt;_col = BLACK;</span><br><span class="line">				<span class="built_in">return</span> <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">			Node* parent = nullptr;</span><br><span class="line">			Node* cur = _root;</span><br><span class="line">			<span class="keyword">while</span> (cur)</span><br><span class="line">			&#123;</span><br><span class="line">			<span class="keyword">if</span> (cur-&gt;_kv.first &gt; kv.first)</span><br><span class="line">			&#123;</span><br><span class="line">				parent = cur;</span><br><span class="line">				cur = cur-&gt;_left;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (cur-&gt;_kv.first &lt; kv.first)</span><br><span class="line">			&#123;</span><br><span class="line">				parent = cur;</span><br><span class="line">				cur = cur-&gt;_right;</span><br><span class="line"></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">			cur = new Node(kv);</span><br><span class="line">			<span class="keyword">if</span> (parent-&gt;_kv.first&lt;kv.first)</span><br><span class="line">			&#123;</span><br><span class="line">				parent-&gt;_right = cur;</span><br><span class="line">				cur-&gt;_parent = parent;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				parent-&gt;_left = cur;</span><br><span class="line">				cur-&gt;_parent = parent;</span><br><span class="line">			&#125;</span><br><span class="line">			//新增节点红色</span><br><span class="line">			cur-&gt;_col = RED;</span><br><span class="line">			<span class="keyword">while</span> (parent&amp;&amp;parent-&gt;_col ==RED)</span><br><span class="line">			&#123;</span><br><span class="line">				Node* garndfther = parent-&gt;_parent;</span><br><span class="line">				<span class="keyword">if</span> (garndfther-&gt;_left == parent)</span><br><span class="line">				&#123;</span><br><span class="line">					//</span><br><span class="line">					Node* uncle = garndfther-&gt;_right;</span><br><span class="line">					//情况1：uncle存在，且为红</span><br><span class="line">					</span><br><span class="line">					<span class="keyword">if</span> (uncle &amp;&amp; uncle-&gt;_col == RED)</span><br><span class="line">					&#123;</span><br><span class="line">						parent-&gt;_col = uncle-&gt;_col = BLACK;</span><br><span class="line">						garndfther-&gt;_col = RED;</span><br><span class="line">						//继续向上处理</span><br><span class="line">						cur = garndfther;</span><br><span class="line">						parent = cur-&gt;_parent;</span><br><span class="line">					&#125;</span><br><span class="line">					//情况2or情况3：uncle不存在or uncle存在，且为黑</span><br><span class="line">					<span class="keyword">else</span></span><br><span class="line">					&#123;   //情况三：先进行左单旋</span><br><span class="line">						<span class="keyword">if</span> (cur == parent-&gt;_right)</span><br><span class="line">						&#123;</span><br><span class="line">							RotateL(parent);</span><br><span class="line">							swap(parent, cur);</span><br><span class="line">						&#125;</span><br><span class="line">						//情况二</span><br><span class="line">						RotateR(garndfther);</span><br><span class="line">						garndfther-&gt;_col = RED;</span><br><span class="line">						parent-&gt;_col = BLACK;</span><br><span class="line">						<span class="built_in">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">				&#123;</span><br><span class="line">					Node* uncle = garndfther-&gt;_left;</span><br><span class="line">				   <span class="keyword">if</span> (uncle&amp;&amp;uncle-&gt;_col == RED)</span><br><span class="line">					&#123;</span><br><span class="line">						parent-&gt;_col = uncle-&gt;_col = BLACK;</span><br><span class="line">						garndfther-&gt;_col = RED;</span><br><span class="line"></span><br><span class="line">						cur = garndfther;</span><br><span class="line">						parent = cur-&gt;_parent;</span><br><span class="line">					&#125;</span><br><span class="line">				   <span class="keyword">else</span></span><br><span class="line">					&#123;</span><br><span class="line">						<span class="keyword">if</span> (cur == parent-&gt;_left)</span><br><span class="line">						&#123;</span><br><span class="line">							RotateR(parent);</span><br><span class="line">							swap(parent, cur);</span><br><span class="line">						&#125;</span><br><span class="line">						//情况二</span><br><span class="line">						RotateL(garndfther);</span><br><span class="line">						garndfther-&gt;_col = RED;</span><br><span class="line">						parent-&gt;_col = BLACK;</span><br><span class="line">						<span class="built_in">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			_root-&gt;_col = BLACK;</span><br><span class="line">			<span class="built_in">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">private:</span><br><span class="line">	Node* _root = nullptr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>红黑树的插入操作相对复杂，需要在插入新节点后进行额外的颜色调整和旋转操作来维护红黑树的性质。通过正确的颜色调整和旋转操作，我们可以保证红黑树在插入操作后仍然保持平衡，并满足其性质。在实际应用中，红黑树常用于实现关联数组、映射等数据结构，以支持高效的查找、插入和删除操作。</p>
 
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -192,16 +214,84 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/03/13/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8n/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2024/05/15/%E7%BA%A2%E9%BB%91%E6%A0%91/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2024/05/15/priority-queue/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          priority_queue
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/05/13/%E5%B7%A6%E6%97%8B%E5%92%8C%E5%8F%B3%E6%97%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">左旋和右旋</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -221,438 +311,14 @@
 
 
 
-
-  
-    <article id="post-vector与list的优缺点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/01/01/vector%E4%B8%8Elist%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9/">vector与list的优缺点</a>
-    </h1>
-  
-
-        
-        <a href="/2024/01/01/vector%E4%B8%8Elist%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9/" class="archive-article-date">
-  	<time datetime="2024-01-01T14:32:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><p>缺点：<br>1、头部和中部的插入删除效率低。0(N),因为需要挪动数据<br>2、插入数据空间不够需要增容。增容需要开新空间、拷贝数据、释放旧空间，会付出很大的代价<br>优点：<br>1、支持下标的随机访问。 间接的就很好的支持排序、二分查找、堆算法等等</p>
-<h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><p>缺点：<br>1、不支持随机访问。<br>优点：<br>1、list头部、中间插入不再需要挪动数据，效率高。0(1)2、list插入数据是新增节点，不需要增容</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h2 id="vector和list是相辅相成的两个容器-所以实际使用中是选择性使用的。"><a href="#vector和list是相辅相成的两个容器-所以实际使用中是选择性使用的。" class="headerlink" title="vector和list是相辅相成的两个容器,所以实际使用中是选择性使用的。"></a>vector和list是相辅相成的两个容器,所以实际使用中是选择性使用的。</h2>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/01/01/vector%E4%B8%8Elist%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-string类型赋值的传统方法与现代方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/25/string%E7%B1%BB%E5%9E%8B%E8%B5%8B%E5%80%BC%E7%9A%84%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95/">string类型赋值的传统方法与现代方法</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/25/string%E7%B1%BB%E5%9E%8B%E8%B5%8B%E5%80%BC%E7%9A%84%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2023-12-25T15:54:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="传统方法"><a href="#传统方法" class="headerlink" title="传统方法"></a>传统方法</h2><p>使用string类型赋值时，由于c++关于string的赋值是浅拷贝，需要使用重载运算符书写深拷贝，而书写string类型赋值深拷贝<br>有传统方法和现在方法两个写法<br>_str是string内指向储存数据指针的成员函数</p>
-<h2 id="传统方法-1"><a href="#传统方法-1" class="headerlink" title="传统方法"></a>传统方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">string&amp; operator=(const String &amp; s)</span><br><span class="line">    &#123;</span><br><span class="line">	 <span class="keyword">if</span> (this!=&amp;s) &#123;</span><br><span class="line">		 char* tmp = new char[strlen(s._str) + 1];</span><br><span class="line">		 strcpy(tmp, s._str);</span><br><span class="line">		 delete[]_str;</span><br><span class="line">		 _str=tmp;</span><br><span class="line">	 &#125;</span><br><span class="line">        <span class="built_in">return</span> *this;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p>传统方法在形参和返回值反面全使用引用，并且在赋值前先检查是否是给自己赋值，避免性能的浪费，在赋值时，先创建一个大小空间与赋值数据相同的tmp,后再拷贝到tmp中，然后delete掉原来_str的空间，再让指针_str指向拷贝好的数据。</p>
-<h2 id="现代方法"><a href="#现代方法" class="headerlink" title="现代方法"></a>现代方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String&amp; operator=(String  s)</span><br><span class="line">    &#123;</span><br><span class="line">        swap(_str,s._str);</span><br><span class="line">        <span class="built_in">return</span> *this;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p>赋值的现在方法相比拷贝构造的现在方法更加过分，简化到只剩两行代码，相比于赋值的传统方法，在形参上取消引用，直接在形参上创造一个新string类s，s与属于独立的空间，并且出了函数作用域会自动调用析构函数，所以只需要让_str与s._str交换便可。</p>
-<h2 id="现代方法与传统方法的区别"><a href="#现代方法与传统方法的区别" class="headerlink" title="现代方法与传统方法的区别"></a>现代方法与传统方法的区别</h2><p>现代方法相对与传统方法并没有函数运行上改善，仅仅是使代码看起来简便，书写方便。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/25/string%E7%B1%BB%E5%9E%8B%E8%B5%8B%E5%80%BC%E7%9A%84%E4%BC%A0%E7%BB%9F%E6%96%B9%E6%B3%95%E4%B8%8E%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-拷贝构造的n中方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/24/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E7%9A%84n%E4%B8%AD%E6%96%B9%E6%B3%95/">string手动深拷贝的传统方法与现代写法</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/24/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E7%9A%84n%E4%B8%AD%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2023-12-24T13:37:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>当我们自定义类型时，深拷贝通常需要手动实现拷贝构造函数和拷贝复制运算符，我将以String为例书写出手动实现深拷贝的几种方法 下面是定义的成员函数：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">char* _str;</span><br></pre></td></tr></table></figure>
-<h2 id="传统方法"><a href="#传统方法" class="headerlink" title="传统方法"></a>传统方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">string(const string&amp; s)</span><br><span class="line">    :_str(new char[strlen(s._str)+1])</span><br><span class="line">&#123;</span><br><span class="line">strcpy(_str,s._str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个写法可以说是大部分人第一次写拷贝函数函数函数了，自己手动new一个与s._str一样大的新空间后，再让_str拷贝s._str的数据</p>
-<h2 id="现代写法"><a href="#现代写法" class="headerlink" title="现代写法"></a>现代写法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string(const string&amp; s)</span><br><span class="line">    :_str(nullptr)</span><br><span class="line">&#123;</span><br><span class="line">    string tmp(s._str);</span><br><span class="line">    swap(_str,tmp._str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>原理是我先在拷贝函数作用域里tmp一个拷贝s._str的数据，后_str与tmp._str交换，便赋值成功，而原来_str的空间数据随着tmp在出作用域时便自动掉析构函数delete了</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/24/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E7%9A%84n%E4%B8%AD%E6%96%B9%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-c++malloc与new" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/06/c++malloc%E4%B8%8Enew/">c++的new与c中malooc的使用方法与区别</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/06/c++malloc%E4%B8%8Enew/" class="archive-article-date">
-  	<time datetime="2023-12-06T11:13:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1，针对内置类型用new还是malloc都是一样的"><a href="#1，针对内置类型用new还是malloc都是一样的" class="headerlink" title="1，针对内置类型用new还是malloc都是一样的"></a>1，针对内置类型用new还是malloc都是一样的</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int* p1 = (int*)malloc(sizeof(int));</span><br><span class="line">int* p2 = new int;</span><br></pre></td></tr></table></figure>
-<h2 id="2，针对自定义类型时"><a href="#2，针对自定义类型时" class="headerlink" title="2，针对自定义类型时"></a>2，针对自定义类型时</h2><p>首先分别写两个自定义类型</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">ypedef struct ListNode_CPP</span><br><span class="line">&#123;</span><br><span class="line">	int _val;</span><br><span class="line">	struct ListNode_CPP *_next;</span><br><span class="line">	struct ListNode_CPP* _prev;</span><br><span class="line">	ListNode_CPP(int val=0)</span><br><span class="line">		:_val(val)</span><br><span class="line">		,_next(nullptr)</span><br><span class="line">		,_prev(nullptr)</span><br><span class="line">&#125;ListNode_CPP;</span><br><span class="line">struct ListNode_C</span><br><span class="line">&#123;</span><br><span class="line">	int _val;</span><br><span class="line">	struct ListNode_C* _next;</span><br><span class="line">	struct ListNode_C* _prev;</span><br><span class="line">&#125;;</span><br><span class="line">typedef struct ListNode_C ListNode_C;</span><br></pre></td></tr></table></figure>
-<p>我们发现在定义类型时用new的ListNode_cpp,比用malloc的ListNode_C需要多写一个构造函数，<br>又因为malloc仅仅是开辟空间<br>还需要书写:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ListNode_C* BuyListNode_C(int a)</span><br><span class="line">&#123;</span><br><span class="line">	ListNode_C* node_c = (ListNode_C*)malloc(sizeof(ListNode_C));</span><br><span class="line">	node_c-&gt;_val = a;</span><br><span class="line">	node_c-&gt;_prev = NULL;</span><br><span class="line">	node_c-&gt;_next = NULL;</span><br><span class="line">	<span class="built_in">return</span> node_c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在定义数据类型时便发现，new不仅开辟空间还会调用自定义类型里构造函数进行初始化，既可以给值又可以不给值，<br>而</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ListNode_C* node1 = BuyListNode_C(1);</span><br><span class="line"></span><br><span class="line">ListNode_CPP* node3 = new ListNode_CPP;</span><br><span class="line">ListNode_CPP* node3 = new ListNode_CPP(5);</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/06/c++malloc%E4%B8%8Enew/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hexo载入图片时常见问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/04/hexo%E8%BD%BD%E5%85%A5%E5%9B%BE%E7%89%87%E6%97%B6%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">hexo博客载入图片与常见问题（the image could not be loaded）</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/04/hexo%E8%BD%BD%E5%85%A5%E5%9B%BE%E7%89%87%E6%97%B6%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2023-12-04T14:12:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> hexo插入本地图片和网络图片的普遍有以下两种方法</p>
-<h3 id="插入本地图片"><a href="#插入本地图片" class="headerlink" title="插入本地图片"></a>插入本地图片</h3><p>本地图片统一放在source&#x2F;images文件夹中<br>例如: source&#x2F;images&#x2F;test.jpg</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">![](images/text.jpg)</span><br><span class="line">&lt;img src=<span class="string">&quot;/images/text.jpg&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="插入网络图片"><a href="#插入网络图片" class="headerlink" title="插入网络图片"></a>插入网络图片</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">![](网络图片地址)</span><br><span class="line">&lt;img src=<span class="string">&quot;网络图片地址&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><p>首先载入本地图片时发现自己格式正确却加载不出图片<br>首先可以尝试把图片jpg格式修改成png格式<br>直接鼠标右键文件重命名即可,然后把格式改成</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">![](images/text.png)</span><br><span class="line">&lt;img src=<span class="string">&quot;/images/text.png&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
-
-<p>如何还是失败<br>可以在cmd中运行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https://github.com/xcodebuild/hexo-asset-image</span><br></pre></td></tr></table></figure>
-
-<p>并在文件的书写改成</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">![](./images/text.jpg)</span><br><span class="line">&lt;img src=<span class="string">&quot;./images/text.jpg&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
-
-<p>若果是网络图片出现问题可能是引用图片的网站存在加密，<br>可保存在本地在插入hexo</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/04/hexo%E8%BD%BD%E5%85%A5%E5%9B%BE%E7%89%87%E6%97%B6%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/04/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/04/hello-world/" class="archive-article-date">
-  	<time datetime="2023-12-04T14:09:46.399Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/04/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -675,8 +341,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
